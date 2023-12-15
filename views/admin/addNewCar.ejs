@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Add New Car</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        // Establish a WebSocket connection
+        const socket = io();
+
+        // Listen for the "newData" event
+        socket.on('newData', (data) => {
+            // Show an alert or update the page with the new data
+            alert('New data added: ' + JSON.stringify(data));
+        });
+    </script>
+
+
+  
+
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/adminnav'); %>
+    </header>
+    <main>
+        <div class="container drop-shadow bg-white p-4 w-80">
+            <div class=" row  ">
+                <h1>Add New Car</h1>
+            </div>
+            <form action="/admin/addcar" method="post">
+                <div class="row ">
+                     <div class="col-12 col-margin mb-3">
+                        <div class="row ">
+
+                            <!-- Error In Adding Car!! -->
+                            <% if(carAddedmsg=="This Car already exsist !!" ){%>
+                                <div class="col-12 ">
+                                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                                            aria-label="Danger:">
+                                            <use xlink:href="#exclamation-triangle-fill" />
+                                        </svg>
+                                        <div>
+                                            <%= carAddedmsg %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } else if (carAddedmsg=="Car Added Sucessfully !!" ){ %>
+                                    <div class="col-12 ">
+                                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                                                aria-label="Danger:">
+                                                <use xlink:href="#exclamation-triangle-fill" />
+                                            </svg>
+                                            <div>
+                                                <%= carAddedmsg %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } %>
+
+
+
+                            
+                           <div class="col-12  col-md-6 col-lg-3  d-flex align-items-center">
+                             <input type="text" max="2023-12-31" class="form-control" name="carName" placeholder="Enter Car Name" value="">
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-3 d-flex align-items-center ">
+                                <select class="form-control mt-2" name="brandId" id="Brands"  >
+                                    <option value="option-1">Select Brands</option>
+                                    <%  if(Brands){ for (let i=0; i < Brands.length; i++) { %>
+                                        <option value="<%= Brands[i]._id %>">
+                                            <%= Brands[i].brandName%>
+                                        </option>
+                                        <% }} %>
+                                </select>
+                            </div>
+                            <div class="col-12  col-md-6 col-lg-3 d-flex align-items-center">
+                                <select class="form-control mt-2" name="varientName" id="varientName">
+                                    <option value="option-1">Select Varient </option>
+                                    <%=Brands._id%>
+                                    <%=Varients.brandId%>
+                                    <%if(Varients){ 
+                                         for (let i=0; i < Varients.length; i++) {
+                                          if(Brands._id==Varients.brandId){ %>
+                                        <option value="<%= Varients.brandId %>">
+                                            <%= Varients[i].varientName %>
+                                        </option>
+                                    <%} }} else{ %><option value="NO VARIENTS">NO VARIENTS</option><%}%>
+
+                                </select>
+                            </div>
+
+
+                            <script>
+                                document.getElementById('Brands').addEventListener('change', function() {
+                                  const selectedBrand = this.value;
+                                  const carVariantSelect = document.getElementById('varientName');
+                              
+                                  // Send an AJAX request to the server to get variants for the selected brand
+                                  fetch(`/admin/variants?brand=${selectedBrand}`)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                    //   console.log(data);
+                                      carVariantSelect.innerHTML = '';
+                                      // Add new options
+                                      data.forEach(variant => {
+                                        const option = document.createElement('option');
+                                        option.value = variant.varientName;
+                                        console.log(variant.varientName);
+                                        option.textContent = variant.varientName;
+                                        carVariantSelect.appendChild(option);
+                                      });
+                                    });
+                                console.log(selectedBrand);
+                                });
+                              </script>
+
+
+
+
+
+
+
+                       
+
+                            <div class="col-12  col-md-6 col-lg-3 d-flex align-items-center">
+                                <input type="date" max="2023-12-31" class="form-control" name="startYear" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 ">
+                        <input  c type="submit" name="" id="" value="Add Car" class="btn text-white w-100  btn-danger">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="container drop-shadow bg-white p-4 w-80">
+            <div class=" row  ">
+                <h1>Add New Varient</h1>
+            </div>
+            <form action="/admin/addvarient" method="post">
+                <div class="row">
+
+
+                    <% if(duplicateVarient=="This Varient already exsist !!" ){%>
+                        <div class="col-12 ">
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                                    aria-label="Danger:">
+                                    <use xlink:href="#exclamation-triangle-fill" />
+                                </svg>
+                                <div>
+                                    <%= duplicateVarient %>
+                                </div>
+                            </div>
+                        </div>
+                        <% } else if (duplicateVarient=="Varient Added Sucessfully" ){ %>
+                            <div class="col-12 ">
+                                <div class="alert alert-success d-flex align-items-center" role="alert">
+                                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                                        aria-label="Danger:">
+                                        <use xlink:href="#exclamation-triangle-fill" />
+                                    </svg>
+                                    <div>
+                                        <%= duplicateVarient %>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }%>
+
+
+                                <div class="col-12 col-md-6  col-margin">
+                                    <label for="ModelName">Varient Name</label>
+                                    <input class="form-control" type="text" name="varientName" value=""
+                                        placeholder="Enter Model Name">
+                                </div>
+                                <div class="col-12 col-md-6  col-margin">
+                                    <label for="varientName">Select Brand</label>
+                                    <select class="form-control mt-2" name="brandId">
+
+                                        <option value="">Select Brand</option>
+                                        <% if(Brands){ for (let i=0; i < Brands.length; i++) { %>
+                                            <option value="<%= Brands[i]._id %>">
+                                                <%= Brands[i].brandName%>
+                                            </option>
+                                            <% }} %>
+
+                                    </select>
+
+                                </div>
+                                <div class="col-12   col-margin">
+                                    <label for="CarName">&nbsp;</label>
+                                    <input class="form-control bg-danger text-white" type="submit" value="Add Model"
+                                        placeholder="Add Model">
+                                </div>
+                </div>
+            </form>
+        </div>
+
+
+
+
+        <div class="container drop-shadow bg-white p-4 w-100">
+            <div class="row">
+                <h1>Add New Brands</h1>
+            </div>
+            <form action="/admin/addbrand" method="post" autocomplete="off">
+                <div class="row">
+    
+                    <% if(duplicateBrand=="This Brand  already exsist !!!" ){%>
+                        <div class="col-12 ">
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                                    <use xlink:href="#exclamation-triangle-fill" />
+                                </svg>
+                                <div>
+                                    <%= duplicateBrand %>
+                                </div>
+                            </div>
+                        </div>
+                        <% } else if (duplicateBrand=="Brand Added Sucessfully" ){ %>
+                            <div class="col-12 ">
+                                <div class="alert alert-success d-flex align-items-center" role="alert">
+                                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                                        aria-label="Danger:">
+                                        <use xlink:href="#exclamation-triangle-fill" />
+                                    </svg>
+                                    <div>
+                                        <%= duplicateBrand %>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }%>
+                                <div class="col-12 col-md-6  col-margin">
+                                    <label for="brandname">Brand Name</label>
+                                    <input class="form-control" type="text" name="brandName" value=""
+                                        placeholder="Enter Brand Name">
+                                </div>
+    
+                                <div class="col-12 col-md-6  col-margin">
+                                    <label for="CarName">&nbsp;</label>
+                                    <input class="form-control bg-danger text-white" required type="submit"
+                                        value="Add Brand" placeholder="Add Brand">
+                                </div>
+                            </div>
+                        </form>
+        </div>
+
+
+
+
+        <div class="container drop-shadow bg-white p-4 w-100">
+            <div class="row">
+                <h1>Add New Part Category</h1>
+            </div>
+            <form action="/admin/addcategory" method="post" autocomplete="off" enctype="multipart/form-data" >
+                <div class="row">
+
+ <% if(categorymsg=="Duplicate Category!!!" ){%>
+    <div class="col-12 ">
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                <use xlink:href="#exclamation-triangle-fill" />
+            </svg>
+            <div>
+                <%= categorymsg %>
+            </div>
+        </div>
+    </div>
+    <% } else if (categorymsg=="Category Added Sucessfully!!!" ){ %>
+        <div class="col-12 ">
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                    aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <div>
+                    <%= categorymsg %>
+                </div>
+            </div>
+        </div>
+        <% }else if (categorymsg=="Category Added Sucessfully!!!" ){ %> 
+    
+            <div class="col-12 ">
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                        aria-label="Danger:">
+                        <use xlink:href="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                        <%= categorymsg %>
+                    </div>
+                </div>
+            </div>                    
+            <% }%>  
+            
+            
+                       <div class="col-12 col-md-6  col-margin">
+                           <label for="brandname">Category Name</label>
+                           <input class="form-control" type="file" name="image1" value="">
+                       </div>
+            
+            
+                               <div class="col-12 col-md-6  col-margin">
+                                    <label for="brandname">Category Name</label>
+                                    <input class="form-control" type="text" name="categoryName" value=""
+                                        placeholder="Enter Category Name">
+                                </div>
+    
+                                <div class="col-12 col-md-6  col-margin">
+                                    <input class="form-control bg-danger text-white" required type="submit"
+                                        value="Add Category" placeholder="Add Category">
+                                </div>
+                             </div>
+                        </form>
+                    </div>
+
+        
+        
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+</body>
+
+</html>

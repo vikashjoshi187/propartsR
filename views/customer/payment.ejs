@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Modal </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- ---------------------------Donut  Script-------------------------------------- -->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Recent Orders', 11],
+                ['Cancelled Orders', 2],
+            ]);
+
+            var options = {
+                title: 'Sales By Category',
+                pieHole: 0.4,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <!-- ------------------------------------------------------------------------------------------------ -->
+
+
+
+    <!-- ---------------------------------------------------Line Chart----------------------------------------------- -->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Sales', 'Expenses', "Profit"],
+                ['2004', 1000, 400, 600],
+                ['2005', 1170, 460, 710],
+                ['2006', 1200, 1120, -460],
+                ['2007', 1030, 540, 490]
+            ]);
+
+            var options = {
+                title: 'Company Performance',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+
+    <!-- ------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+    <style>
+        * {
+            font-family: 'League Spartan', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            padding: 0px;
+            color: #590202;
+        }
+
+        .navbar {
+            border-radius: 0 0 25px 25px;
+
+        }
+
+        h1 {
+            font-weight: 700;
+        }
+
+        .nav-link {
+
+            font-size: 20px;
+            font-weight: 800;
+            color: #590202;
+
+        }
+
+        .drop-shadow {
+            /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; */
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        }
+
+        .container {
+            margin-top: 2vh;
+            border-radius: 25px;
+        }
+
+        #main-search-input {
+            height: 70px;
+            text-align: center;
+            color: #590202;
+            font-size: 1.2rem;
+            border-radius: 23px;
+        }
+
+
+        #main-search-btn {
+            height: 70px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 23px;
+            background-color: #590202;
+        }
+
+
+        .buyButton {
+            background-color: #590202;
+            color: white;
+            border: 2px solid #590202;
+        }
+
+        .cata-box {
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .form-control:focus {
+            border-color: #590202;
+            /* Change the border color on focus */
+            box-shadow: 0 0 5px #590202;
+            /* Add a box shadow on focus */
+        }
+
+
+        .form-control {
+            color: #590202;
+
+        }
+
+        .card-shadow {
+            box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px 0px, rgba(0, 0, 0, 0.09) 0px 4px 2px 0px, rgba(0, 0, 0, 0.09) 0px 8px 4px 0px, rgba(0, 0, 0, 0.09) 0px 16px 8px 0px, rgba(0, 0, 0, 0.09) 0px 32px 16px 0px;
+        }
+
+        .col-margin {
+            margin-bottom: 10px;
+        }
+
+        .footer-link {
+            font-size: 15px;
+        }
+
+        #scrollable-div {
+            max-height: 100vh;
+            overflow-y: auto;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .Payemnt {
+            border: 2px solid #590202;
+            border-radius: 10px;
+
+        }
+
+
+        /* Style the custom radio button */
+        .radio-container {
+            display: inline-block;
+            position: relative;
+            padding-left: 25px;
+            /* Adjust as needed for the size of the radio button */
+            cursor: pointer;
+        }
+
+        .radio-container::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            /* Adjust as needed for the size of the radio button */
+            height: 18px;
+            /* Adjust as needed for the size of the radio button */
+            background-color: #ccc;
+            border: 1px solid #999;
+            border-radius: 50%;
+        }
+
+        /* Style the custom radio button when checked */
+        .radio-container input[type="radio"]:checked+.radio-label::before {
+            background-color: #007bff;
+            /* Change to your preferred color */
+            border-color: #007bff;
+            /* Change to your preferred color */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+</head>
+
+<body style="background-color: #590202; height: 100vh">
+    <header>
+
+    </header>
+    <main>
+
+        <!-- Button trigger modal -->
+        <form action="">
+            <h6>Mobile Number :- <span>+91&nbsp;9999999999</span></h6>
+            <h6>Amount to be Paid :- <span>$&nbsp;99999</span> </h6>
+
+            <div class="row ">
+                <div class="col-12 p-3 ">
+                    <div class="w-100 border-4 d-flex align-items-center p-2 Payemnt mt-2">
+                        <div class="w-25">
+                            <img src="public/pay.png" width="50%" alt="">
+                        </div>
+                        <div class="w-50  d-flex ">
+                            <h5 class="h5">PhonePe</h5>
+                        </div>
+                        <div class="w-25 d-flex justify-content-end p-3 ">
+                            <input type="radio" name="paymentapplication" value="">
+                        </div>
+                    </div>
+
+                    <div class="w-100 border-4 d-flex align-items-center p-2 Payemnt mt-2">
+                        <div class="w-25">
+                            <img src="public/pay2.png" width="50%" alt="">
+                        </div>
+                        <div class="w-50  d-flex ">
+                            <h5 class="h5">Amazon Pay</h5>
+                        </div>
+                        <div class="w-25 d-flex justify-content-end p-3 ">
+                            <input type="radio" name="paymentapplication" value="">
+                        </div>
+                    </div>
+                    <div class="w-100 border-4 d-flex align-items-center p-2 Payemnt mt-2">
+                        <div class="w-25">
+                            <img src="public/pay3.png" width="50%" alt="">
+                        </div>
+                        <div class="w-50  d-flex ">
+                            <h5 class="h5">Google Pay</h5>
+                        </div>
+                        <div class="w-25 d-flex justify-content-end p-3 ">
+                            <input class="" type="radio" name="paymentapplication" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-grid gap-2 mt-3 ps-3 pe-3 pb-2">
+                <button id="main-search-btn" type="button" name="" id="" class="btn ">Update Details</button>
+                <button data-bs-dismiss="modal" id="main-search-btn" type="button" name="" id=""
+                    class="btn  ">Cancel</button>
+            </div>
+        </form>
+    </main>
+
+
+</body>
+
+</html>

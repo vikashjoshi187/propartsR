@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body style="background-color: #590202;">
+    <%- include('../partials/customernav'); %>
+
+        <main>
+          
+            <form id="cart-form" action="/placeOrder" method="post">
+                <div class="container bg-white drop-shadow ">
+                    <div class="w-100 p-3 ps-5 ">
+                        <h1 class="h1">My Cart</h1> 
+                    </div>
+                        <% if(products.length <=0){ %>
+                            <center><h3 class="pb-5">Cart is empty</h3></center>
+                        <% }else{%>
+                    <div class="row w-100 bg-opacity-75 m-0">
+                        <% products.forEach(function(product){%>
+                            <!-- <form action="/placeOrderForProduct<%=product._id%>" method="post"> -->
+                            <div class="col-12 col-md-12 col-lg-6 d-flex justify-content-center m-0">
+                                <div class="card m-3 card-shadow" style="max-width: 540px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-4 w-25 h-75 d-flex align-items-center justify-content-center">
+                                            <img src="uploads/<%=product.image1%>" class="img-fluid rounded-start w-50 h-50"
+                                                alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h4 class="card-title">
+                                                    <%=product.name%>
+                                                </h4>
+                                                <h6 class="card-title">$<%=product.sellingPrice%>&nbsp;<span><del>$
+                                                                <%=product.price%>
+                                                            </del></span> </h6>
+                                                <p class="card-text">
+                                                    <%=product.description%>
+                                                </p>
+                                                <p class="card-text text-danger">
+                                                    Stock available : <%=product.quantity%>
+                                                </p>
+
+                                                <div class="input-group flex-nowrap w-75">
+                                                        <input type="number" class="form-control quantity-input"
+                                                        placeholder="Quantity" name="<%=product._id%>"
+                                                        value="<%=product.quantity%>" min="1"
+                                                        data-quantity="<%=product.quantity%>" required>
+
+                                                </div>
+                                                <br>
+
+                                                <!-- <p class="card-text"><small class="text-muted">Sold By :- <span>Seller Name</span></small><br> -->
+                                                <small class="text-muted">Manufactured By :- <span>
+                                                        <%=product.productBrand%>
+                                                    </span></small>
+                                                </p>
+                                                <button class="btn btn-primary buyButton place-order-button" data-product-id="<%=product._id%>" type="button">Buy Now</button>
+                                                <a href="/cartremove<%=product._id%>"
+                                                    class="btn buyButton btn-danger">Remove</a>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%})%>
+                                <div class="d-grid gap-2 mb-3">
+                                    <a href="" class="main-search-btn"><button type="submit" name=""
+                                            class="btn btn-close-white">Buy All</button></a>
+                                </div>
+                    </div>
+                    <% } %>
+            </form>
+        </main>
+        <%- include('../partials/footer'); %>
+
+</body>
+
+<script>
+    document.querySelectorAll('.place-order-button').forEach((button) => {
+        button.addEventListener('click', async () => {
+            const productId = button.getAttribute('data-product-id');
+            const quantityInput = button.parentElement.querySelector('.quantity-input');
+            const quantity = parseInt(quantityInput.value, 10);
+            const maxQuantity = parseInt(quantityInput.getAttribute('data-quantity'), 10);
+
+            if (quantity >= 1 && quantity <= maxQuantity) {
+                // Proceed with placing the order
+                placeOrder(productId, quantity);
+            } else {
+                // Show an alert for an invalid quantity
+                alert('Please enter a valid quantity between 1 and ' + maxQuantity);
+            }
+        });
+    });
+
+    // Function to place the order using fetch
+    async function placeOrder(productId, quantity) {
+        // Send a POST request to place an order for the product
+        const response = await fetch(`/placeOrderForProduct${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ quantity }),
+        });
+        const data = await response.json();
+        console.log(data);
+        if (data) {
+            // Handle a successful order, e.g., display a success message
+            console.log(`Order placed for product ${productId} successfully`);
+            window.location = `/shippingaddress/${data.orderID}`;
+        } else {
+            // Handle errors, e.g., display an error message
+            console.error(`Error placing the order for product ${productId}`);
+        }
+    }
+
+    // Add event listener for the form submit
+    document.getElementById('cart-form').addEventListener('submit', (event) => {
+        const quantityInputs = document.querySelectorAll('.quantity-input');
+        let isValid = true;
+        var maxQuantity;
+        quantityInputs.forEach((input) => {
+            const quantity = parseInt(input.value, 10);
+             maxQuantity = parseInt(input.getAttribute('data-quantity'), 10);
+
+            if (quantity < 1 || quantity > maxQuantity) {
+                isValid = false;
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+
+        if (!isValid) {
+            alert('Please enter a valid quantity between 1 and ' + maxQuantity);
+        } else {
+
+        }
+    });
+</script>
+
+</html>

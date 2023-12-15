@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Update Details</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+      <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+  integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+</script>
+
+    <style>
+
+        body{background-color: #590202;}
+        * {
+            font-family: 'League Spartan', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            padding: 0px;
+            color: #590202;
+        }
+
+        .navbar {
+            border-radius: 0 0 25px 25px;
+
+        }
+
+        h1 {
+            font-weight: 700;
+        }
+
+        .nav-link {
+
+            font-size: 20px;
+            font-weight: 800;
+            color: #590202;
+
+        }
+
+        .drop-shadow {
+            /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; */
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        }
+
+        .container {
+            margin-top: 2vh;
+            border-radius: 25px;
+        }
+
+        #main-search-input {
+            height: 70px;
+            text-align: center;
+            color: #590202;
+            font-size: 1.2rem;
+            border-radius: 23px;
+        }
+
+
+        #main-search-btn {
+            height: 70px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 23px;
+            background-color: #590202;
+        }
+
+
+        .buyButton {
+            background-color: #590202;
+            color: white;
+            border: 2px solid #590202;
+        }
+
+        .cata-box {
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .form-control:focus {
+            border-color: #590202;
+            /* Change the border color on focus */
+            box-shadow: 0 0 5px #590202;
+            /* Add a box shadow on focus */
+        }
+
+
+        .form-control {
+            color: #590202;
+
+        }
+
+        .card-shadow {
+            box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px 0px, rgba(0, 0, 0, 0.09) 0px 4px 2px 0px, rgba(0, 0, 0, 0.09) 0px 8px 4px 0px, rgba(0, 0, 0, 0.09) 0px 16px 8px 0px, rgba(0, 0, 0, 0.09) 0px 32px 16px 0px;
+        }
+
+        .col-margin {
+            margin-bottom: 10px;
+        }
+    </style>
+
+
+</head>
+
+
+
+<body>
+  <header>
+    <!-- place navbar here -->
+    <%- include('../partials/customernav'); %>
+  </header>
+  <main>
+
+    <section class="vh-80">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-12 col-xl-4">
+      
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body text-center">
+                  <div class="mt-3 mb-3">
+                    <img src="images\avatar.png" alt="This Profile Image" style="width: 200px;" />
+                  </div>
+                  <h3 class="mb-2"><%=user.username%></h3>
+                  <h5 class="mb-2"><%=user.phone%></h5>
+                  <p class="text-muted mb-4">User<span class="mx-2">|</span> <span><%=user.email%> </span></p>
+  
+                  <!-- <button type="button" class="btn btn-primary btn-rounded btn-lg"  data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+                  <a href="/updateprofile"><button type="button" class="btn btn-primary btn-rounded btn-lg">Update Profile</button></a>
+                  <a href="/updatePassword"><button type="button" class="btn btn-primary btn-rounded btn-lg">Update Password</button></a>
+                 
+                  <!-- <div class="d-flex justify-content-between text-center mt-5 mb-2">
+                    <div>
+                      <p class="mb-2 h5">8471</p>
+                      <p class="text-muted mb-0">Shipped Orders</p>
+                    </div>
+                  
+                    <div>
+                      <p class="mb-2 h5">4751</p>
+                      <p class="text-muted mb-0">Total Orders</p>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+      
+            </div>
+          </div>
+        </div>
+      </section>
+
+  
+  <!-- Update Details Modal -->
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content drop-shadow">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Update Details</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+<form action="/updateUserdetails" method="post">
+    
+
+            <input class="form-control mt-3" id="main-search-input" type="text" name="name" placeholder="name" required value="">
+            <input class="form-control mt-3" id="main-search-input" type="password" name="oldPassword" placeholder="Old Password" required value="">
+            <input class="form-control mt-3" id="main-search-input" type="password" name="newpassword" placeholder="New Password" required value="">
+            <div class="w-100  row mt-3">
+                <div class="col-6 d-flex align-items-center justify-content-center" >
+                    <label for="Male">Male &nbsp;</label>
+                    <input type="radio" name="gender" value="male">
+                </div>
+                 <div class="col-6 d-flex align-items-center ">
+                <label for="Female">Female &nbsp;</label>
+                <input type="radio" name="gender" value="female">
+            </div>    
+            </div>
+             <div class="d-grid gap-2 mt-3">
+            <input id="main-search-btn" type="submit" name="" id="" class="btn" value="Update Details">
+          </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  </main>
+  <footer>
+    <%- include('../partials/footer'); %>
+
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+        * {
+            font-family: 'League Spartan', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            padding: 0px;
+            color: #590202;
+        }
+
+        .navbar {
+            border-radius: 0 0 25px 25px;
+
+        }
+
+        h1 {
+            font-weight: 700;
+        }
+
+        .nav-link {
+
+            font-size: 20px;
+            font-weight: 800;
+            color: #590202;
+
+        }
+
+        .drop-shadow {
+            /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; */
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        }
+
+        .container {
+            margin-top: 2vh;
+            border-radius: 25px;
+        }
+
+        #main-search-input {
+            height: 70px;
+            text-align: center;
+            color: #590202;
+            font-size: 1.2rem;
+            border-radius: 23px;
+        }
+
+
+        .main-search-btn {
+            height: 70px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 23px;
+            background-color: #590202;
+        }
+
+
+        .buyButton {
+            background-color: #590202;
+            color: white;
+            border: 2px solid #590202;
+        }
+
+        .cata-box {
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .form-control:focus {
+            border-color: #590202;
+            /* Change the border color on focus */
+            box-shadow: 0 0 5px #590202;
+            /* Add a box shadow on focus */
+        }
+
+
+        .form-control {
+            color: #590202;
+
+        }
+
+        .card-shadow {
+            box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px 0px, rgba(0, 0, 0, 0.09) 0px 4px 2px 0px, rgba(0, 0, 0, 0.09) 0px 8px 4px 0px, rgba(0, 0, 0, 0.09) 0px 16px 8px 0px, rgba(0, 0, 0, 0.09) 0px 32px 16px 0px;
+        }
+
+        .col-margin {
+            margin-bottom: 10px;
+        }
+
+        .footer-link{
+            font-size: 15px;
+        }
+
+        #scrollable-div {
+            max-height: 100vh;
+            overflow-y: auto; 
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        
+/* Center the entire pagination horizontally */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+/* Style for the "Previous" and "Next" links */
+.pagination-link {
+    padding: 5px 10px;
+    margin: 5px;
+    text-decoration: none;
+    color: white; /* Change to your desired link color */
+    border: 1px solid white; /* Change to your desired border color */
+    border-radius: 5px;
+}
+
+/* Style for the page number links */
+.pagination-pages {
+    display: flex;
+    align-items: center;
+}
+
+.pagination-page {
+    padding: 5px 10px;
+    margin: 5px;
+    text-decoration: none;
+    color: white; /* Change to your desired link color */
+    border: 1px solid white; /* Change to your desired border color */
+    border-radius: 5px;
+}
+
+/* Style for the active page number link */
+.pagination-page.active {
+    background-color: #590202; /* Change to your desired active page color */
+    color: #fff; /* Change to your desired text color for active page */
+    border: 1px solid white; /* Change to your desired border color for active page */
+}
+
+.categoryImg{
+    transition: .5s;
+}
+.categoryImg:hover{
+    scale:115%;
+}

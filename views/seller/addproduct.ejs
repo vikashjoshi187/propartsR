@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Add New Product</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body style="background-color: #590202;">
+    <%- include('../partials/sellernav'); %>
+        <div class="container drop-shadow bg-white p-4 w-80">
+            <div class=" row  ">
+                <h1>Add New Product</h1>
+            </div>
+
+        <form  action="/seller/addproduct" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="col-12 col-md-6  col-margin">
+                    <label for="product name">Product Name</label>
+                    <input class="form-control" type="text" name="product_name" value=""
+                        placeholder="Enter Product Name">
+                </div>
+
+                <div class="col-12 col-md-6 col-margin">
+                    <label for="product price">Product Price</label>
+                    <input class="form-control" type="number" name="product_price" value=""
+                        placeholder="Enter Product Price">
+                </div>
+
+                <div class="col-12 col-md-6  col-margin">
+                    <label for="Actual price">Actual Price</label>
+                    <input class="form-control" type="number" name="Actual_price" value=""
+                        placeholder="Enter Actual Price">
+                </div>
+
+
+                <div class="col-12 col-md-6  col-margin">
+                    <label for="Quantity">Quantity</label>
+                    <input class="form-control" type="number" name="Quantity" value="" placeholder="Enter Quantity">
+                </div>
+
+
+
+                <div class="col-12 col-md-6  col-margin">
+                    <label for="Return Days">Return Days</label>
+                    <input class="form-control" type="number" name="Return_Days" value=""
+                        placeholder="Enter Return Days">
+                </div>
+
+
+                <div class="col-12 col-md-6  col-margin">
+                    <label for="Catagory">Catagory</label>
+                    <select class="form-control" id="selectCategories" name="Catagory">
+                        <option value="option 1">Select Catagory</option>
+                    </select>
+                </div>
+
+
+                <div class="col-12 col-md-6  col-margin">
+                    <label for="Catagory">Manufacturer Name</label>
+                    <input class="form-control"  type="text" name="Brand" value="" placeholder="Manufacturer">
+                </div>
+
+                <div class="col-12 col-md-6  col-margin">
+                    <label for="Description">Description</label>
+                    <textarea class="form-control" rows="1" name="Description" cols="" placeholder="Description"></textarea>
+                </div>
+
+                <h4>Product Image</h4>
+                <div class="col-6 d-flex justify-content-center col-margin">
+                    <img class="w-50" src="images/cat1.webp " alt="">
+                </div>
+
+                <div class="col-6   d-flex justify-content-around  col-margin">
+                    <input type="file" class="form-control" name="image1" id="image1">
+                </div>
+
+                <div class="col-12 col-margin mb-3">
+                    <div class="row ">
+                    
+                        <div class="col-12  col-md-6 col-lg-3 ">
+                            <select class="form-control mt-2" id="Brands" name="car_marker">
+                                <option value="option-1">Select Brand</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-12  col-md-6 col-lg-3">
+                            <select class="form-control mt-2" id="Models" name="car_type">
+                                <option value="oprion-1">Select Model</option>
+                            </select>
+                        </div>
+                    
+
+                        <div class="col-12  col-md-6 col-lg-3">
+                            <select class="form-control mt-2" id="varientName" name="car_modification">
+                                <option value="oprion-1">Select Varient</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-12  col-md-6 col-lg-3">
+                            <select class="form-control mt-2" id="startYear" name="car_year">
+                                <option value="oprion-1">Select Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="d-grid gap-2" id="main-search-btn">
+                    <button type="submit" name="" id="" class="btn text-white">Add this Product</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+        <%- include('../partials/footer'); %>
+
+        <script src="js/script.js"></script>
+    </body>
+
+</html>

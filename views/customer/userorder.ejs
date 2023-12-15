@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>User Orders</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body style="background-color: #590202;">
+     <%- include('../partials/customernav'); %>
+
+     <!-- <script>
+        $(document).ready(function () {
+          $("#myTable").DataTable();
+        });
+    </script> -->
+
+    <main>
+        <div class="container bg-white p-2">
+
+            <div class=" ms-1 mt-2 p-0   d-flex align-items-center">
+                <h1 class="ms-4">My Orders List</h1>
+            </div>
+
+            <!-- <div class="row  p-2 ">
+                <div class="col-12 col-md-6">
+                    <form action="">
+                        <div class="btn-group ps-2" role="group" aria-label="Basic outlined example">
+                            <input type="text" class="form-control" placeholder="Search" name="search">
+                            <input type="submit" class="btn btn-danger" value="Search">
+                        </div>
+                    </form>
+                </div>
+            </div> -->
+
+            <div id="scrollable-div">
+
+                <div class="container w-100 ">
+                    <table id="myTable" class="table table-danger  table-striped ">
+                        <thead class="sticky-lg-top">
+                            <tr>
+                                <th>SNo.</th>
+                                <th>Order ID</th>
+                                <th>Total Products</th>
+                                <th>Total Price</th>
+                                <th>Order Date </th>
+                                <th>Status</th>
+                                <!-- <th>Pan Number</th> -->
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dummy data rows -->
+                            <%var i=1 %>
+                            <% orders.forEach(function(order){%>
+                            <tr>
+                                <td><%= i++ %></td>
+                                <td><%= order._id %></td>
+                                <td><%= order.products.length %></td>
+                                <td><%= order.orderTotal %></td>
+                                <td><%= order.orderDate %></td>
+                                <td><%= order.orderStatus %></td>
+                                <!-- <td><button class="btn btn-danger" type="button">View Order</button></td> -->
+                                <td>
+                                    <button class="btn btn-danger text-white text-decoration-none  text-center px-5 placeorder" data-order-id="<%= order._id %>" dats data-bs-toggle="modal" data-bs-target="#exampleModal" ><a href="#" >view Order</a></button>
+                                </td>
+                            </tr>
+                            <%});%>
+                            <!-- Add more rows with dummy data as needed -->
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </main>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+      
+          <div class="modal-content" >
+            <div class="modal-header" >
+      
+              <h3 style="color: whitesmoke; font-weight: bold;" class="modal-title" id="exampleModalLabel">Place Order</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>    
+          </div>
+      
+          <div class="modal-content">
+            <div class="modal-header">
+            <h3>your cart items</h3>
+            </div>  
+            <div class="modal-body"  id="modalBody">
+              <table class="table table-striped table-borderless ">
+                <thead style="background-color:#590202 ;" >
+                    <tr>
+                        <th style="color: white;" scope="col">S.no</th>
+                        <th style="color: white;" scope="col">Product Image</th>
+                        <th style="color: white;" scope="col">Product Name</th>
+                        <th style="color: white;" scope="col">Qty</th>
+                        <th style="color: white;" scope="col">Unit Price</th>
+                        <th style="color: white;" scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                       
+                </tbody>
+
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+    <%- include('../partials/footer'); %>
+
+<!-- <script>
+document.querySelectorAll('.placeorder').forEach((button, index) => {
+    button.addEventListener('click', async function () {
+        const orderId = button.getAttribute('data-order-id');
+        const modalTableBody = document.getElementById('modalBody').querySelector('tbody');
+
+        console.log(orderId);
+        try {
+            var data = await fetch(`/vieworder${orderId}`, { method: 'get' })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    // Clear existing content in the modal table body
+                    modalTableBody.innerHTML = '';
+
+                    // Iterate through the fetched data and append rows to the table
+                    data.forEach((product, index) => {
+                        const row = `
+                            <tr>
+                                <th>${index + 1}</th>
+                                <th><img class="w-25 table-img" src="${product.productDetails.image1}" alt=""></th>
+                                <td>${product.productDetails.name}</td>
+                                <td>${product.quantity}</td>
+                                <td>${product.productDetails.sellingPrice}</td>
+                                <td>${product.quantity * product.productDetails.sellingPrice}</td>
+                            </tr>
+                        `;
+                        modalTableBody.innerHTML += row;
+                    });
+
+                    // Open the modal
+                    const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                    myModal.show();
+
+
+                });
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    });
+});
+</script> -->
+
+<!-- <script>
+    document.querySelectorAll('.placeorder').forEach((button, index) => {
+        button.addEventListener('click', async function () {
+            const orderId = button.getAttribute('data-order-id');
+            const modalTableBody = document.getElementById('modalBody').querySelector('tbody');
+    
+            console.log(orderId);
+            try {
+                var data = await fetch(`/vieworder${orderId}`, { method: 'get' })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+    
+                        // Clear existing content in the modal table body
+                        modalTableBody.innerHTML = '';
+    
+                        // Iterate through the fetched data and append rows to the table
+                        data.forEach((product, index) => {
+                            const row = `
+                                <tr>
+                                    <th>${index + 1}</th>
+                                    <th><img class="w-25 table-img" src="${product.productDetails.image1}" alt=""></th>
+                                    <td>${product.productDetails.name}</td>
+                                    <td>${product.quantity}</td>
+                                    <td>${product.productDetails.sellingPrice}</td>
+                                    <td>${product.quantity * product.productDetails.sellingPrice}</td>
+                                </tr>
+                            `;
+                            modalTableBody.innerHTML += row;
+                        });
+    
+                        // Open the modal
+                        const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                        myModal.show();
+                    });
+            } catch (error) {
+                console.log('Error:', error);
+            }
+        });
+    });
+    </script> -->
+    <script>
+        document.querySelectorAll('.placeorder').forEach((button, index) => {
+            button.addEventListener('click', async function () {
+                const orderId = button.getAttribute('data-order-id');
+                const modalTableBody = document.getElementById('modalBody').querySelector('tbody');
+        
+                // console.log(orderId);
+                try {
+                    var data = await fetch(`/vieworder${orderId}`, { method: 'get' })
+                        .then(res => res.json());
+        
+                    console.log("data ",data);
+                    console.log("data ",data[0]);
+        
+                    // Clear existing content in the modal table body
+                    // modalTableBody.innerHTML = '';
+        
+                    // Check if data is an array
+                    if (Array.isArray(data)) {
+                        // Iterate through the fetched data and append rows to the table
+                        data.forEach((product, index) => {
+                            console.log("data :",product.productDetails.image1)
+                            const row = `
+                                <tr>
+                                    <th>${index + 1}</th>
+                                    <th><img class="w-25 table-img" src="images/${product.productDetails.image1}" alt=""></th>
+                                    <td>${product.productDetails.name}</td>
+                                    <td>${product.quantity}</td>
+                                    <td>${product.productDetails.sellingPrice}</td>
+                                    <td>${product.quantity * product.productDetails.sellingPrice}</td>
+                                </tr>
+                            `;
+                            modalTableBody.innerHTML += row;
+                        });
+        
+                        // Open the modal
+                        const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                        myModal.show();
+                    } else {
+                        console.error('Invalid data format:', data);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+        </script>
+        
+</body>
+
+</html>
